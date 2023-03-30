@@ -1,7 +1,7 @@
-# lmdb-dict
+# lmdb-dict-full
 
-[![PyPI - Version](https://img.shields.io/pypi/v/lmdb-dict.svg)](https://pypi.org/project/lmdb-dict)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/lmdb-dict.svg)](https://pypi.org/project/lmdb-dict)
+[![PyPI - Version](https://img.shields.io/pypi/v/lmdb-dict-full.svg)](https://pypi.org/project/lmdb-dict-full)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/lmdb-dict-full.svg)](https://pypi.org/project/lmdb-dict-full)
 
 **The full-featured `dict` interface to the LMDB "Lightning" Database.**
 
@@ -25,7 +25,7 @@
 ## Installation
 
 ```console
-pip install lmdb-dict
+pip install lmdb-dict-full
 ```
 
 ## Use
@@ -60,23 +60,23 @@ Note that it would otherwise be unsafe to hold open multiple `lmdb` client objec
 
 Caching of LMDB itself *should not be necessary*. The database "fully exploits the operating system’s buffer cache" and memory mapping [[ref]](https://lmdb.readthedocs.io/en/release/).
 
-Moreover, `lmdb-dict` makes every effort to use `lmdb` efficiently, such that the user need not be concerned with undue overhead of interacting with the database-backed dictionary.
+Moreover, `lmdb-dict-full` makes every effort to use `lmdb` efficiently, such that the user need not be concerned with undue overhead of interacting with the database-backed dictionary.
 
-That said: the value serialization layer of `SafeLmdbDict` is another matter. Given sufficiently hefty values to deserialize, it *may* be worthwhile to engage the `lmdb-dict` caching layer, along with the trade-offs that it entails.
+That said: the value serialization layer of `SafeLmdbDict` is another matter. Given sufficiently hefty values to deserialize, it *may* be worthwhile to engage the `lmdb-dict-full` caching layer, along with the trade-offs that it entails.
 
 #### Caveats
 
-**`lmdb-dict` caching is thread-safe**
+**`lmdb-dict-full` caching is thread-safe**
 
 This is achieved with behind-the-scenes locking – narrowly applied to singular keys where feasible – but the small overhead of which applies when caching.
 
-**`lmdb-dict` caching is *not* (yet) *automatically* process-safe**
+**`lmdb-dict-full` caching is *not* (yet) *automatically* process-safe**
 
 Caching is thread-safe thanks to thread locks and (again) weak references to caches which must be shared across dictionaries backed by the same databases.
 
 Achieving the same under a multiprocessing regime would be another matter.
 
-Users may nonetheless make use of `lmdb-dict` while multiprocessing, either without caching or with thoughtful application of caches across processes.
+Users may nonetheless make use of `lmdb-dict-full` while multiprocessing, either without caching or with thoughtful application of caches across processes.
 
 #### Options
 
@@ -96,7 +96,7 @@ SafeLmdbDict('/path/to/db/directory/', cache=LRUCache128)
 
 Above, we've specified that our `SafeLmdbDict` should cache deserialized values using an instance of `LRUCache128` – that is, a subclass of the `LRUCache` provided by [cachetools](https://pypi.org/project/cachetools/). `LRUCache128` distinguishes itself only in that it requires no initialization arguments – a requirement of supplying a callable in lieu of a cache instance – and it sets `maxsize=128`.
 
-As a shortcut to the above, `lmdb-dict` provides `CachedLmdbDict`:
+As a shortcut to the above, `lmdb-dict-full` provides `CachedLmdbDict`:
 
 ```python
 from lmdb_dict import CachedLmdbDict
@@ -124,4 +124,4 @@ StrLmdbDict('/path/to/db/directory/')
 
 ## License
 
-`lmdb-dict` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+`lmdb-dict-full` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

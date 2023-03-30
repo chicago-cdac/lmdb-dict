@@ -1,5 +1,5 @@
 [project]
-name = "lmdb-dict"
+name = "lmdb-dict-full"
 description = 'Full-featured Python dict interface to the LMDB "Lightning" Database.'
 readme = "README.md"
 requires-python = ">=3.8"
@@ -41,6 +41,11 @@ Source = "https://github.com/chicago-cdac/lmdb-dict"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = [
+  "/lmdb_dict",
+]
 
 [tool.hatch.version]
 path = "lmdb_dict/__about__.py"
