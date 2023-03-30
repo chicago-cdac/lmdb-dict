@@ -1,0 +1,39 @@
+name: Test & Lint
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: |
+          3.8
+          3.9
+          3.10
+          3.11
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install flake8 hatch
+
+    - name: Test with coverage
+      run: |
+        hatch run test:cov
+
+    - name: Lint
+      run: |
+        flake8 --count --show-source --statistics lmdb_dict/
