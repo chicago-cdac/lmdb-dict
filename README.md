@@ -2,6 +2,7 @@
 
 [![PyPI - Version](https://img.shields.io/pypi/v/lmdb-dict-full.svg)](https://pypi.org/project/lmdb-dict-full)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/lmdb-dict-full.svg)](https://pypi.org/project/lmdb-dict-full)
+[![Test, Cov & Lint - Status](https://github.com/chicago-cdac/lmdb-dict/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/chicago-cdac/lmdb-dict/actions/workflows/test.yml?query=branch%3Amain)
 
 **The full-featured `dict` interface to the LMDB "Lightning" Database.**
 
